@@ -1,90 +1,125 @@
-<html>
 
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv=Content-Type content="text/html; charset=utf-8">
-<meta name=Generator content="Microsoft Word 15 (filtered)">
-<style>
-<!--
- /* Font Definitions */
- @font-face
-	{font-family:"Cambria Math";
-	panose-1:2 4 5 3 5 4 6 3 2 4;}
-@font-face
-	{font-family:Calibri;
-	panose-1:2 15 5 2 2 2 4 3 2 4;}
- /* Style Definitions */
- p.MsoNormal, li.MsoNormal, div.MsoNormal
-	{margin:0in;
-	font-size:12.0pt;
-	font-family:"Calibri",sans-serif;}
-@page WordSection1
-	{size:595.3pt 841.9pt;
-	margin:1.0in 1.0in 1.0in 1.0in;}
-div.WordSection1
-	{page:WordSection1;}
--->
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aloha Adventures</title>
+    <style>
+        body {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
 
+        .title-banner {
+            width: 100%;
+            background: linear-gradient(to right, #DF1F2D, #2B3784); /* Default gradient colors */
+            text-align: center;
+            color: #fff; /* Text color for the banner */
+            padding: 10px 0; /* Adjust padding as needed */
+        }
+
+        .center-content {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            width: 150px;
+        }
+
+        #qrCodeImage {
+            max-width: 80%; /* Adjust the percentage as needed */
+        }
+
+        #videoPlayer {
+            max-width: 40%; /* Adjust the percentage as needed */
+        }
+
+        /* Hide video controls */
+        #videoPlayer::-webkit-media-controls {
+            display: none !important;
+        }
+
+        #videoPlayer::-webkit-media-controls-enclosure {
+            display: none !important;
+        }
+    </style>
 </head>
+<body>
+    <div class="title-banner">
+        <h1>Aloha Adventures</h1>
+    </div>
 
-<body lang=EN-US style='word-wrap:break-word'>
+    <div class="center-content">
+        <!-- Use an empty img tag as a placeholder for the QR code -->
+        <img id="qrCodeImage" alt="QR Code">
+    </div>
 
-<div class=WordSection1>
+    <!-- Video player for MP4 file -->
+    <video autoplay loop id="videoPlayer" muted onclick="unmuteVideo()">
+        <source id="videoSource" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
 
-<p class=MsoNormal>&lt;!DOCTYPE html&gt;</p>
+    <div class="center-content">
+        <p>Brought to you by</p>
+        <img id="logoImage" alt="Logo" class="logo">
+    </div>
 
-<p class=MsoNormal>&lt;html&gt;</p>
+    <script>
+        // Array of QR codes and image logos
+        const qrCodes = ['AAAQR.png', 'FarmersQR.png', 'SpidermanQR.png', 'QRCode4.png'];
+        const logos = ['AAA.png', 'Farmers.png', 'SpiderMan.png', 'RedBull.jpg'];
+        const videos = ['Video1.mp4', 'Video2.mp4', 'Video3.mp4', 'Max.mp4'];
 
-<p class=MsoNormal>&lt;head&gt;</p>
+        // Function to generate a random index
+        function getRandomIndex(arr) {
+            return Math.floor(Math.random() * arr.length);
+        }
 
-<p class=MsoNormal>            &lt;title&gt;Calendar&lt;/title&gt;</p>
+        // Randomly select QR code, logo, and video
+        const RandomIndex = getRandomIndex(qrCodes);
 
-<p class=MsoNormal>            &lt;meta charset=&quot;UTF-8&quot;&gt;</p>
+        // Set the src attribute of the QR code, logo, and video sources
+        document.getElementById('qrCodeImage').src = qrCodes[RandomIndex];
+        document.getElementById('logoImage').src = logos[RandomIndex];
+        document.getElementById('videoSource').src = videos[RandomIndex];
 
-<p class=MsoNormal>            &lt;meta name=&quot;viewport&quot;
-content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</p>
+        // Function to set gradient colors for the title banner based on the selected index
+        function setGradientColors(index) {
+            const gradientColors = [
+                ['#ff9966', '#ff5e62'], // Gradient 1
+                ['#33ccff', '#3366ff'], // Gradient 2
+                ['#DF1F2D', '#2B3784'], // Gradient 3
+                ['#FED502', '#EC1845'], // RedBull 4
 
-<p class=MsoNormal>            &lt;style&gt;</p>
+            ]; // Preset gradient colors
 
-<p class=MsoNormal>                        /* Add your CSS styles here */</p>
+            const selectedColors = gradientColors[index];
+            document.querySelector('.title-banner').style.background = `linear-gradient(to right, ${selectedColors[0]}, ${selectedColors[1]})`;
 
-<p class=MsoNormal>            &lt;/style&gt;</p>
+            // Check if index 3 is selected and show the video player instead of the QR code image
+            if (index === 3) {
+                document.getElementById('qrCodeImage').style.display = 'none';
+                document.getElementById('videoPlayer').style.display = 'block';
+            }
+        }
 
-<p class=MsoNormal>&lt;/head&gt;</p>
+        // Function to unmute the video when clicked
+        function unmuteVideo() {
+            const videoPlayer = document.getElementById('videoPlayer');
+            videoPlayer.muted = false;
+        }
 
-<p class=MsoNormal>&lt;body&gt;</p>
-
-<p class=MsoNormal>            &lt;form&gt;</p>
-
-<p class=MsoNormal>                        &lt;label
-for=&quot;days&quot;&gt;Number of days:&lt;/label&gt;</p>
-
-<p class=MsoNormal>                        &lt;input type=&quot;number&quot;
-id=&quot;days&quot; name=&quot;days&quot; min=&quot;1&quot; max=&quot;16&quot;
-required&gt;</p>
-
-<p class=MsoNormal>                        &lt;br&gt;&lt;br&gt;</p>
-
-<p class=MsoNormal>                        &lt;label
-for=&quot;date&quot;&gt;Select a date:&lt;/label&gt;</p>
-
-<p class=MsoNormal>                        &lt;input type=&quot;date&quot;
-id=&quot;date&quot; name=&quot;date&quot; min=&quot;2024-01-24&quot;
-max=&quot;2024-02-08&quot; required&gt;</p>
-
-<p class=MsoNormal>                        &lt;br&gt;&lt;br&gt;</p>
-
-<p class=MsoNormal>                        &lt;input type=&quot;submit&quot;
-value=&quot;Submit&quot;&gt;</p>
-
-<p class=MsoNormal>            &lt;/form&gt;</p>
-
-<p class=MsoNormal>&lt;/body&gt;</p>
-
-<p class=MsoNormal>&lt;/html&gt;</p>
-
-</div>
-
+        // Call the setGradientColors function with the random index to set specific gradient colors for the title banner
+        setGradientColors(RandomIndex);
+    </script>
 </body>
-
 </html>
